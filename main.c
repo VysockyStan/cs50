@@ -3,10 +3,8 @@
 
 int main()
 {
-    unsigned char ch=50;
+    
 
 
-
-    scanf("%d",ch);
     return 0;
 }
