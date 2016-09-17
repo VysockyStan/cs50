@@ -33,7 +33,7 @@ int main()
         exit(1);
     }
 
-    //Put the card number into massive
+    //Put the card number into array
     int number[dig_count];
     temp = card_number;
 
