@@ -1,79 +1,114 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <cs50.h>
+#include <math.h>
 
 int main()
 {
-// Program that prompts the user for a credit card number and then
-// reports whether it is a valid American Express, MasterCard or Visa card number.
-
     long long card_number;
-    int dig_count = 0;
+ 
+    // Ask for user's input  
 
-   // Ask for credit card number
     do
-    {
-    printf("Enter your credit card: ");
+    {printf("Enter card number: \n");
     card_number = GetLongLong();
-
     }
     while (card_number < 0);
 
-    //Get number of digits in card number
-    long long temp = card_number;
-    while (temp >= 1)
+    // Counts a number of digits
+    int dig_count = 0;
+    long long digits = card_number;
+    
+    while (digits > 0)
     {
-        temp = temp / 10;
+        digits = digits/10;
         dig_count++;
     }
-
+    
     //Check if the card is valid according to the length
-    if (!(dig_count == 13 || dig_count == 15 || dig_count == 16))
+    if ((dig_count != 13) && (dig_count != 15) && (dig_count != 16))
     {
         printf("INVALID\n");
-        exit(1);
     }
-
-    //Put the card number into array
+    
+    //Getting array of digits
     int number[dig_count];
-    temp = card_number;
-
-    for (int i = 0, j = dig_count-1; i < dig_count; i++)
+   
+    for (int i = 0; i < dig_count; i++)
     {
-        number[j--] = temp % 10;
-        temp /= 10;
+        number[i] = card_number % 10;
+        card_number = card_number / 10;
     }
-
-    //Get the sum of numbers, that are placed at the even places
-    int summa = 0;
-    int x;
-    for (int i = 1; i < dig_count; i += 2)
+    
+     
+    int original_number[dig_count];
+    for (int i = 1; i < dig_count; i++)
     {
-        x = number[i]*2;
-        summa += x / 10 + x % 10;
+        original_number[i] = number[i];
     }
-
-    //Adding the rest of numbers to the sum above
-    for (int i = 0; i < dig_count; i+=2)
+    
+   //Multiply by 2 every digit at even place 
+    for (int i = 1; i < dig_count; i+=2)
     {
-        summa += number[i];
+        number[i] = number[i] * 2;
     }
-
-    //Check if the last digit is 0
-    if(summa % 10 != 0)
+    
+    int sum = 0;
+    int temp;
+    
+    //Check which card was entered
+    if (dig_count == 13)
     {
-        printf("INVALID");
-        exit(1);
+      for (int i = 0; i < dig_count; i++)
+      {
+        temp = (number[i] % 10) + (number[i]/10 % 10);
+        sum = sum + temp;
+      }
+      if (original_number[12] == 4 && sum % 10 == 0)
+      {
+        printf("VISA\n");
+      }
+      else
+      {
+        printf("INVALID\n");
+      }
     }
-
-    //Check the initial digits and print the result
-    x = number[0] * 10 + number[1];
-
-    switch(dig_count)
+    if (dig_count == 15)
     {
-        case 13: if(number[0] == 4) printf("VISA"); break;
-        case 15: if(x == 34 || x == 37) printf("AMERICAN"); break;
-        case 16: if(number[0] == 4) printf("VISA");
-                 else if(x > 50 && x < 56) printf("MASTER");
+      for (int i = 0; i < dig_count; i++)
+      {
+        temp = (number[i] % 10) + (number[i]/10 % 10);
+        sum = sum + temp;
+      }
+      if (original_number[14] == 3 && sum % 10 == 0 && (original_number[13] == 4 || original_number[13] == 7))
+      {
+        printf("AMEX\n");
+      }
+      else
+      {
+        printf("INVALID\n");
+      }
     }
-
+    if (dig_count == 16)
+    {
+      for (int i = 0; i < dig_count; i++)
+      {
+        temp = (number[i] % 10) + (number[i]/10 % 10);
+        sum = sum + temp;
+      }
+      if (original_number[15] == 4 && sum % 10 == 0)
+      {
+        printf("VISA\n");
+      }
+      else if (original_number[15] == 5 && sum % 10 == 0 && (original_number[14] == 1 || original_number[14] == 2 || original_number[14] == 3 || original_number[14] == 4 || original_number[14] == 5))
+        {
+            printf("MASTERCARD\n");
+        }
+      else
+      {
+        printf("INVALID\n");
+      }
+    }
+    
+return 0;
 }
