@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <cs50.h>
 
 int main()
 {
@@ -17,17 +18,14 @@ int main()
         minute = GetInt();
     }
     while (minute <= 0);
-    
-    
+        
    if (minute > 0)
    {
         bottle_amount = minute * 12;
         printf("Number of bottle is: %d\n", bottle_amount);
    }
-        
+       
     else printf("Retry");
     
-
-
 return 0;
 }
