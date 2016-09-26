@@ -9,7 +9,6 @@ int main(void)
     // Почему-то не проходит проверку,если активна printf, а без неё проходит.
     //printf("Enter user's name: \n");
     string name = GetString();
-    
     int first = 0;
 
     // Get first letter and check spaces
@@ -17,7 +16,6 @@ int main(void)
     {
         first++;
     }
-
     printf("%c", toupper(name[first]));
 
     //  Check the rest of name
@@ -27,7 +25,6 @@ int main(void)
         while (name[i] == ' ')
         {
             i++;
-
             // print if next char is not space
             if ( i < j && name[i] != ' ')
             {
@@ -35,7 +32,6 @@ int main(void)
             }
         }   
     }
-
     // Print new line
     printf("\n");
   
