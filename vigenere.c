@@ -25,6 +25,7 @@ int main(int argc, string argv[])
         }
     
     //GetTing the user's string
+    printf("plaintext:");
     string input_text = GetString();
       
     //Declare variables and setting them to '0'
@@ -36,6 +37,7 @@ int main(int argc, string argv[])
     
     string key = argv[1];
         
+    printf("ciphertext:");
     //Loop through user's input
     for (i = 0, input_length = strlen(input_text); i < input_length; i++)
         { 
