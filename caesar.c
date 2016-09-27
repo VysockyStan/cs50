@@ -18,6 +18,7 @@ int main(int argc, string argv[])
     }
     
     // get input text
+    printf("plaintext:");
     string text = GetString();
 
     // convert that string to an actual int
@@ -29,6 +30,7 @@ int main(int argc, string argv[])
         key = (key % 26);
     }
 
+    printf("ciphertext:");
     // Loop through input string
     for(int i = 0, length = strlen(text); i < length; i++)
     {
