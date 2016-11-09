@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td>{{ total | usd }}</td>
+            </tr>
+        </tfoot>
+        <tbody>
+             {% for out in query %}
+            <tr>
+                 <td>{{ out.symbol }}</td>
+                 <td>{{ out.name }}</td></td>
+                 <td>{{ out['SUM(amount)']}}</td>
+                 <td>{{ out.price | usd }}</td>
+                 <td>{{ out.total | usd }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="4">CASH</td>
+                <td>{{ cash | usd }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
